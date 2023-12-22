@@ -4,7 +4,6 @@ import (
 	"jim/jim"
 	"log"
 	"os"
-	"strings"
 
 	"github.com/urfave/cli/v2"
 )
@@ -17,7 +16,7 @@ func main() {
 				Aliases: []string{"i"},
 				Usage:   "init repository in current directory",
 				Action: func(cCtx *cli.Context) error {
-					jim.Init()
+					jim.Init(cCtx)
 					return nil
 				},
 			},
@@ -25,8 +24,7 @@ func main() {
 				Name:  "ignore",
 				Usage: "remove repository in current directory",
 				Action: func(cCtx *cli.Context) error {
-					ignorePath := cCtx.Args().Get(0)
-					jim.IgnoreFiles(ignorePath)
+					jim.IgnoreFiles(cCtx)
 					return nil
 				},
 			},
@@ -34,8 +32,7 @@ func main() {
 				Name:  "unignore",
 				Usage: "remove repository in current directory",
 				Action: func(cCtx *cli.Context) error {
-					ignorePath := cCtx.Args().Get(0)
-					jim.UnIgnoreFiles(ignorePath)
+					jim.UnIgnoreFiles(cCtx)
 					return nil
 				},
 			},
@@ -43,9 +40,7 @@ func main() {
 				Name:  "checkout",
 				Usage: "git checkout",
 				Action: func(cCtx *cli.Context) error {
-					targetBranch := cCtx.Args().Get(0)
-					targetBranch = strings.Trim(targetBranch, " \n")
-					jim.Checkout(targetBranch)
+					jim.Checkout(cCtx)
 					return nil
 				},
 			},
