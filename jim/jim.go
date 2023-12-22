@@ -61,3 +61,7 @@ func Checkout(cCtx *cli.Context) {
 		jimgit.PopStash(prevStashIndex)
 	}
 }
+
+func Run(cCtx *cli.Context) {
+	fmt.Println("Hello world")
+}

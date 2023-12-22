@@ -10,6 +10,12 @@ import (
 
 func main() {
 	app := &cli.App{
+		Name:  "jim",
+		Usage: "jim is a git wrapper",
+		Action: func(cCtx *cli.Context) error {
+			jim.Run(cCtx)
+			return nil
+		},
 		Commands: []*cli.Command{
 			{
 				Name:    "init",
