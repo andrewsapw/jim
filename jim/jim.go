@@ -6,12 +6,9 @@ import (
 	"jim/path"
 	"jim/run"
 	"path/filepath"
-
-	"github.com/go-git/go-billy/v5"
-	"github.com/go-git/go-git/v5/storage"
 )
 
-func Init(s storage.Storer, worktree billy.Filesystem) {
+func Init() {
 	currentPath := path.CurrentPath()
 	initRepoCommand := fmt.Sprintf("git init %s", currentPath)
 	output := run.RunGitCommand(initRepoCommand, true)
