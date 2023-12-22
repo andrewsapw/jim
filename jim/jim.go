@@ -13,7 +13,7 @@ import (
 
 func Init(cCtx *cli.Context) {
 	currentPath := path.CurrentPath()
-	initRepoCommand := fmt.Sprintf("git init %s", currentPath)
+	initRepoCommand := fmt.Sprintf("init %s", currentPath)
 	output := run.RunGitCommand(initRepoCommand, true)
 	fmt.Print(output)
 }
