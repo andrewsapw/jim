@@ -14,23 +14,21 @@ func GetStashes() git.StashCollection {
 	return stashes
 }
 
-func GetStashIndex(stashName string) int {
-	// find stash by name
-	stashes := GetStashes()
-	var stashIndex = -1
+func GetStashIndex(stashName string) (int, error) {
+	getStashesCommand := "stash list"
+	stashesStr := run.RunGitCommand(getStashesCommand, true)
 
-	stashes.Foreach(func(index int, message string, id *git.Oid) error {
-		fmt.Println(message)
-		if strings.Contains(message, stashName) {
-			stashIndex = index
-			return fmt.Errorf("found")
+	fmt.Println(stashesStr)
+
+	// find stash index by name
+	for index, stash := range strings.Split(stashesStr, "\n") {
+		fmt.Println(stash)
+		if strings.Contains(stash, stashName) {
+			return index, nil
 		}
-		return nil
-	})
+	}
 
-	fmt.Println(stashIndex)
-
-	return stashIndex
+	return -1, fmt.Errorf("Stash not found")
 }
 
 func CreateStash(stashName string) {

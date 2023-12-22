@@ -52,9 +52,9 @@ func Checkout(targetBranch string) {
 
 	// // maybe we can reset previously saved stash
 	prevStashName := createStashName(targetBranch)
-	prevStashIndex := jimgit.GetStashIndex(prevStashName)
+	prevStashIndex, err := jimgit.GetStashIndex(prevStashName)
 
-	if prevStashIndex != -1 {
+	if err == nil {
 		jimgit.PopStash(prevStashIndex)
 	}
 }
