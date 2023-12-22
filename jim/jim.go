@@ -65,5 +65,6 @@ func Checkout(cCtx *cli.Context) {
 func Run(cCtx *cli.Context) {
 	args := cCtx.Args().Slice()
 	command := strings.Join(args, " ")
-	run.RunGitCommand(command, true)
+	output := run.RunGitCommand(command, false)
+	fmt.Print(output)
 }
