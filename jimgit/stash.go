@@ -3,6 +3,7 @@ package jimgit
 import (
 	"fmt"
 	"jim/errutils"
+	"jim/run"
 	"strings"
 
 	git "github.com/libgit2/git2go/v34"
@@ -49,7 +50,6 @@ func CreateStash(stashName string) {
 }
 
 func PopStash(stashIndex int) {
-	repo := GetRepository()
-
-	repo.Stashes.Pop(stashIndex, git.StashApplyOptions{})
+	popStashCommand := fmt.Sprintf("stash pop stash@{%d}", stashIndex)
+	run.RunGitCommand(popStashCommand, true)
 }
