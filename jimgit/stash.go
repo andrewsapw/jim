@@ -2,7 +2,6 @@ package jimgit
 
 import (
 	"fmt"
-	"jim/errutils"
 	"jim/run"
 	"strings"
 
@@ -35,18 +34,8 @@ func GetStashIndex(stashName string) int {
 }
 
 func CreateStash(stashName string) {
-	repo := GetRepository()
-
-	stashIndex := GetStashIndex(stashName)
-
-	if stashIndex != 0 {
-		repo.Stashes.Drop(stashIndex)
-	}
-	// get signrautre
-	signature, err := repo.DefaultSignature()
-	errutils.ProcessError(err)
-
-	repo.Stashes.Save(signature, stashName, git.StashDefault)
+	createStashCommand := fmt.Sprintf("stash save %s", stashName)
+	run.RunGitCommand(createStashCommand, true)
 }
 
 func PopStash(stashIndex int) {
