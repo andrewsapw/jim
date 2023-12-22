@@ -2,13 +2,13 @@ package jimgit
 
 import (
 	"fmt"
-	"jim/run"
+	"jim/execute"
 	"strings"
 )
 
 func GetStashIndex(stashName string) (int, error) {
 	getStashesCommand := "stash list"
-	stashesStr := run.RunGitCommand(getStashesCommand, true)
+	stashesStr := execute.RunGitCommand(getStashesCommand, true)
 
 	fmt.Println(stashesStr)
 
@@ -25,10 +25,10 @@ func GetStashIndex(stashName string) (int, error) {
 
 func CreateStash(stashName string) {
 	createStashCommand := fmt.Sprintf("stash save %s", stashName)
-	run.RunGitCommand(createStashCommand, true)
+	execute.RunGitCommand(createStashCommand, true)
 }
 
 func PopStash(stashIndex int) {
 	popStashCommand := fmt.Sprintf("stash pop stash@{%d}", stashIndex)
-	run.RunGitCommand(popStashCommand, true)
+	execute.RunGitCommand(popStashCommand, true)
 }

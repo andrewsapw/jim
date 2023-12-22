@@ -2,10 +2,10 @@ package jimgit
 
 import (
 	"fmt"
-	"jim/run"
+	"jim/execute"
 )
 
 func CheckoutBranch(branchName string) {
 	checkoutCommand := fmt.Sprintf("checkout %s", branchName)
-	run.RunGitCommand(checkoutCommand, false)
+	execute.RunGitCommand(checkoutCommand, false)
 }
