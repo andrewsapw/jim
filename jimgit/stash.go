@@ -4,15 +4,7 @@ import (
 	"fmt"
 	"jim/run"
 	"strings"
-
-	git "github.com/libgit2/git2go/v34"
 )
-
-func GetStashes() git.StashCollection {
-	repo := GetRepository()
-	stashes := repo.Stashes
-	return stashes
-}
 
 func GetStashIndex(stashName string) (int, error) {
 	getStashesCommand := "stash list"
