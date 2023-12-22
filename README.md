@@ -14,7 +14,7 @@ jim is a tool for help you with git.
 Just run:
 
 ```bash
-go install github.com/andrewsapw/jim
+go get -u github.com/andrewsapw/jim
 ```
 
 ### Build from source
