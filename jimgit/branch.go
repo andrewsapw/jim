@@ -3,6 +3,7 @@ package jimgit
 import (
 	"fmt"
 	"jim/errutils"
+	"jim/run"
 
 	git "github.com/libgit2/git2go/v34"
 )
@@ -26,20 +27,6 @@ func GetHead() *git.Reference {
 }
 
 func CheckoutBranch(branchName string) {
-	repo := GetRepository()
-	branch := GetBranch(branchName)
-
-	localCommit, err := repo.LookupCommit(branch.Target())
-	errutils.ProcessError(err)
-
-	fmt.Println(localCommit.Message())
-
-	tree, err := repo.LookupTree(localCommit.TreeId())
-	errutils.ProcessError(err)
-
-	// checkout branch
-	repo.CheckoutTree(tree, &git.CheckoutOptions{
-		Strategy: git.CheckoutSafe | git.CheckoutRecreateMissing | git.CheckoutAllowConflicts | git.CheckoutUseTheirs,
-	})
-	// repo.SetHead(branch.Reference.Name())
+	checkoutCommand := fmt.Sprintf("checkout %s", branchName)
+	run.RunGitCommand(checkoutCommand, false)
 }
