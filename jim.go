@@ -1,7 +1,7 @@
 package main
 
 import (
-	"jim/jim"
+	"jim/commands"
 	"log"
 	"os"
 
@@ -13,7 +13,7 @@ func main() {
 		Name:  "jim",
 		Usage: "jim is a git wrapper",
 		Action: func(cCtx *cli.Context) error {
-			jim.Run(cCtx)
+			commands.Run(cCtx)
 			return nil
 		},
 		Commands: []*cli.Command{
@@ -22,7 +22,7 @@ func main() {
 				Aliases: []string{"i"},
 				Usage:   "init repository in current directory",
 				Action: func(cCtx *cli.Context) error {
-					jim.Init(cCtx)
+					commands.Init(cCtx)
 					return nil
 				},
 			},
@@ -30,7 +30,7 @@ func main() {
 				Name:  "ignore",
 				Usage: "remove repository in current directory",
 				Action: func(cCtx *cli.Context) error {
-					jim.IgnoreFiles(cCtx)
+					commands.IgnoreFiles(cCtx)
 					return nil
 				},
 			},
@@ -38,7 +38,7 @@ func main() {
 				Name:  "unignore",
 				Usage: "remove repository in current directory",
 				Action: func(cCtx *cli.Context) error {
-					jim.UnIgnoreFiles(cCtx)
+					commands.UnIgnoreFiles(cCtx)
 					return nil
 				},
 			},
@@ -46,7 +46,7 @@ func main() {
 				Name:  "checkout",
 				Usage: "git checkout",
 				Action: func(cCtx *cli.Context) error {
-					jim.Checkout(cCtx)
+					commands.Checkout(cCtx)
 					return nil
 				},
 			},

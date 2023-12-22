@@ -1,4 +1,4 @@
-package jim
+package commands
 
 import (
 	"fmt"
