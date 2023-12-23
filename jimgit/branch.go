@@ -26,7 +26,7 @@ func SyncCurrentBranch(cCtx *cli.Context) {
 	pullCommand := "pull --ff-only"
 	execute.RunGitCommand(pullCommand, false, cCtx)
 
-	// push
-	pushCommand := "push"
+	// push current branch
+	pushCommand := "push -u"
 	execute.RunGitCommand(pushCommand, false, cCtx)
 }
