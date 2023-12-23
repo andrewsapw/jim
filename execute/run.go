@@ -44,7 +44,11 @@ func RunGitCommand(command string, allowFail bool, cCtx *cli.Context) string {
 	dryRun := cCtx.Bool("dry-run")
 
 	if verbose {
-		fmt.Printf("jim: git %s\n", command)
+		if dryRun {
+			fmt.Printf("jim (dry-run): git %s\n", command)
+		} else {
+			fmt.Printf("jim: git %s\n", command)
+		}
 	}
 	commandArgs, _ := Split(command)
 
