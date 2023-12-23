@@ -4,7 +4,8 @@ jim is a tool for help you with git.
 
 ## Commands
 
-- `jim checkout [<branch>]` - Checkout a branch. First, it stashes current branch changes. Then, it checks out the specified branch. Finally, it pops the stash on the target branch (if jim created it before).
+- `jim sw [<branch>]` - Checkout a branch. First, it stashes current branch changes. Then, it checks out the specified branch. Finally, it pops the stash on the target branch (if jim created it before).
+- `jim sync` - Sync the current branch with the remote branch.
 - `jim ignore [<file>]` - Do not track a file. Under the hood, it runs `git update-index --assume-unchanged [<file>]`
 - `jim unignore [<file>]` - Track a file. Under the hood, it runs `git update-index --no-assume-unchanged [<file>]`
 
@@ -14,7 +15,7 @@ jim is a tool for help you with git.
 Just run:
 
 ```bash
-go install github.com/andrewsapw/jim@latest
+go install -u github.com/andrewsapw/jim@latest
 ```
 
 ### Build from source
