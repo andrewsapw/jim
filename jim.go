@@ -1,10 +1,10 @@
 package main
 
 import (
-	"jim/commands"
 	"log"
 	"os"
 
+	"github.com/andrewsapw/jim/commands"
 	"github.com/urfave/cli/v2"
 )
 

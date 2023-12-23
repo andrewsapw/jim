@@ -2,12 +2,12 @@ package commands
 
 import (
 	"fmt"
-	"jim/execute"
-	"jim/jimgit"
-	"jim/path"
 	"path/filepath"
 	"strings"
 
+	"github.com/andrewsapw/jim/execute"
+	"github.com/andrewsapw/jim/jimgit"
+	"github.com/andrewsapw/jim/path"
 	"github.com/urfave/cli/v2"
 )
 
@@ -17,7 +17,6 @@ func IgnoreFiles(cCtx *cli.Context) {
 
 	configPath := filepath.Join(currentPath, ignorePath)
 	command := fmt.Sprintf("update-index --assume-unchanged %s", configPath)
-
 	execute.RunGitCommand(command, false, cCtx)
 }
 

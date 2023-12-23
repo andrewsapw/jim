@@ -2,9 +2,9 @@ package jimgit
 
 import (
 	"fmt"
-	"jim/execute"
 	"strings"
 
+	"github.com/andrewsapw/jim/execute"
 	"github.com/urfave/cli/v2"
 )
 

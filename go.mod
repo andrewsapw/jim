@@ -1,4 +1,4 @@
-module jim
+module github.com/andrewsapw/jim
 
 go 1.21.5
 
