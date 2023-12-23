@@ -38,7 +38,7 @@ func safeSplit(s string) []string {
 }
 
 func RunGitCommand(command string, allowFail bool) string {
-	fmt.Printf("Running: git %s\n", command)
+	fmt.Printf("jim: git %s\n", command)
 
 	commandArgs, _ := Split(command)
 
