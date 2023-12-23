@@ -6,6 +6,8 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/urfave/cli/v2"
 )
 
 func safeSplit(s string) []string {
@@ -37,9 +39,13 @@ func safeSplit(s string) []string {
 	return result
 }
 
-func RunGitCommand(command string, allowFail bool) string {
-	fmt.Printf("jim: git %s\n", command)
+func RunGitCommand(command string, allowFail bool, cCtx *cli.Context) string {
+	verbose := cCtx.Bool("verbose")
+	dryRun := cCtx.Bool("dry-run")
 
+	if verbose {
+		fmt.Printf("jim: git %s\n", command)
+	}
 	commandArgs, _ := Split(command)
 
 	cmd := exec.Command("git", commandArgs...)
@@ -48,6 +54,10 @@ func RunGitCommand(command string, allowFail bool) string {
 
 	cmd.Stdout = &outBuffer
 	cmd.Stderr = &errBuffer
+
+	if dryRun {
+		return ""
+	}
 
 	err := cmd.Run()
 

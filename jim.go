@@ -16,6 +16,16 @@ func main() {
 			commands.Run(cCtx)
 			return nil
 		},
+		Flags: []cli.Flag{
+			&cli.BoolFlag{
+				Name:  "verbose",
+				Usage: "show verbose output",
+			},
+			&cli.BoolFlag{
+				Name:  "dry-run",
+				Usage: "do not actually run command. use with --verbose flag",
+			},
+		},
 		Commands: []*cli.Command{
 			{
 				Name:  "sw",

@@ -11,13 +11,6 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func Init(cCtx *cli.Context) {
-	currentPath := path.CurrentPath()
-	initRepoCommand := fmt.Sprintf("init %s", currentPath)
-	output := execute.RunGitCommand(initRepoCommand, true)
-	fmt.Print(output)
-}
-
 func IgnoreFiles(cCtx *cli.Context) {
 	ignorePath := cCtx.Args().Get(0)
 	currentPath := path.CurrentPath()
@@ -25,7 +18,7 @@ func IgnoreFiles(cCtx *cli.Context) {
 	configPath := filepath.Join(currentPath, ignorePath)
 	command := fmt.Sprintf("update-index --assume-unchanged %s", configPath)
 
-	execute.RunGitCommand(command, false)
+	execute.RunGitCommand(command, false, cCtx)
 }
 
 func UnIgnoreFiles(cCtx *cli.Context) {
@@ -36,7 +29,7 @@ func UnIgnoreFiles(cCtx *cli.Context) {
 	configPath := filepath.Join(currentPath, ignorePath)
 	command := fmt.Sprintf("update-index --no-assume-unchanged %s", configPath)
 
-	execute.RunGitCommand(command, false)
+	execute.RunGitCommand(command, false, cCtx)
 }
 
 func createStashName(branchName string) string {
@@ -47,28 +40,28 @@ func Checkout(cCtx *cli.Context) {
 	targetBranch := cCtx.Args().Get(0)
 	targetBranch = strings.Trim(targetBranch, " \n")
 
-	currentBranch := execute.RunGitCommand("branch --show-current", false)
+	currentBranch := execute.RunGitCommand("branch --show-current", false, cCtx)
 	stashName := createStashName(currentBranch)
 
-	jimgit.CreateStash(stashName)
-	jimgit.CheckoutBranch(targetBranch)
+	jimgit.CreateStash(stashName, cCtx)
+	jimgit.CheckoutBranch(targetBranch, cCtx)
 
 	// // maybe we can reset previously saved stash
 	prevStashName := createStashName(targetBranch)
-	prevStashIndex, err := jimgit.GetStashIndex(prevStashName)
+	prevStashIndex, err := jimgit.GetStashIndex(prevStashName, cCtx)
 
 	if err == nil {
-		jimgit.PopStashByIndex(prevStashIndex)
+		jimgit.PopStashByIndex(prevStashIndex, cCtx)
 	}
 }
 
 func Sync(cCtx *cli.Context) {
-	jimgit.SyncCurrentBranch()
+	jimgit.SyncCurrentBranch(cCtx)
 }
 
 func Run(cCtx *cli.Context) {
 	args := cCtx.Args().Slice()
 	command := strings.Join(args, " ")
-	output := execute.RunGitCommand(command, false)
+	output := execute.RunGitCommand(command, false, cCtx)
 	fmt.Print(output)
 }
