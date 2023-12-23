@@ -11,24 +11,31 @@ import (
 func main() {
 	app := &cli.App{
 		Name:  "jim",
-		Usage: "jim is a git wrapper",
+		Usage: "jim is a git wrapper. if jim does not known command you entered, jim will run git command.",
 		Action: func(cCtx *cli.Context) error {
 			commands.Run(cCtx)
 			return nil
 		},
 		Commands: []*cli.Command{
 			{
-				Name:    "init",
-				Aliases: []string{"i"},
-				Usage:   "init repository in current directory",
+				Name:  "sw",
+				Usage: "switch branch",
 				Action: func(cCtx *cli.Context) error {
-					commands.Init(cCtx)
+					commands.Checkout(cCtx)
+					return nil
+				},
+			},
+			{
+				Name:  "sync",
+				Usage: "sync branch",
+				Action: func(cCtx *cli.Context) error {
+					commands.Sync(cCtx)
 					return nil
 				},
 			},
 			{
 				Name:  "ignore",
-				Usage: "remove repository in current directory",
+				Usage: "ignore files (git update-index --assume-unchanged)",
 				Action: func(cCtx *cli.Context) error {
 					commands.IgnoreFiles(cCtx)
 					return nil
@@ -36,17 +43,9 @@ func main() {
 			},
 			{
 				Name:  "unignore",
-				Usage: "remove repository in current directory",
+				Usage: "unignore files (git update-index --no-assume-unchanged)",
 				Action: func(cCtx *cli.Context) error {
 					commands.UnIgnoreFiles(cCtx)
-					return nil
-				},
-			},
-			{
-				Name:  "checkout",
-				Usage: "git checkout",
-				Action: func(cCtx *cli.Context) error {
-					commands.Checkout(cCtx)
 					return nil
 				},
 			},

@@ -28,7 +28,32 @@ func CreateStash(stashName string) {
 	execute.RunGitCommand(createStashCommand, true)
 }
 
-func PopStash(stashIndex int) {
+func DeleteStashByName(stashName string) {
+	stashIndex, err := GetStashIndex(stashName)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	DeleteStashByIndex(stashIndex)
+}
+
+func DeleteStashByIndex(stashIndex int) {
+	deleteStashCommand := fmt.Sprintf("stash drop stash@{%d}", stashIndex)
+	execute.RunGitCommand(deleteStashCommand, true)
+}
+
+func PopStashByIndex(stashIndex int) {
 	popStashCommand := fmt.Sprintf("stash pop stash@{%d}", stashIndex)
 	execute.RunGitCommand(popStashCommand, true)
+}
+
+func PopStashByName(stashName string) {
+	stashIndex, err := GetStashIndex(stashName)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	PopStashByIndex(stashIndex)
 }

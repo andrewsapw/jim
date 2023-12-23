@@ -58,8 +58,12 @@ func Checkout(cCtx *cli.Context) {
 	prevStashIndex, err := jimgit.GetStashIndex(prevStashName)
 
 	if err == nil {
-		jimgit.PopStash(prevStashIndex)
+		jimgit.PopStashByIndex(prevStashIndex)
 	}
+}
+
+func Sync(cCtx *cli.Context) {
+	jimgit.SyncCurrentBranch()
 }
 
 func Run(cCtx *cli.Context) {
