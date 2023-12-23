@@ -9,6 +9,17 @@ import (
 )
 
 func main() {
+	globalFlags := []cli.Flag{
+		&cli.BoolFlag{
+			Name:  "verbose",
+			Usage: "show verbose output",
+		},
+		&cli.BoolFlag{
+			Name:  "dry-run",
+			Usage: "do not actually run command. use with --verbose flag",
+		},
+	}
+
 	app := &cli.App{
 		Name:  "jim",
 		Usage: "jim is a git wrapper. if jim does not known command you entered, jim will run git command.",
@@ -16,16 +27,7 @@ func main() {
 			commands.Run(cCtx)
 			return nil
 		},
-		Flags: []cli.Flag{
-			&cli.BoolFlag{
-				Name:  "verbose",
-				Usage: "show verbose output",
-			},
-			&cli.BoolFlag{
-				Name:  "dry-run",
-				Usage: "do not actually run command. use with --verbose flag",
-			},
-		},
+		Flags: globalFlags,
 		Commands: []*cli.Command{
 			{
 				Name:  "sw",
@@ -34,6 +36,7 @@ func main() {
 					commands.Checkout(cCtx)
 					return nil
 				},
+				Flags: globalFlags,
 			},
 			{
 				Name:  "sync",
@@ -42,6 +45,7 @@ func main() {
 					commands.Sync(cCtx)
 					return nil
 				},
+				Flags: globalFlags,
 			},
 			{
 				Name:  "ignore",
@@ -50,6 +54,7 @@ func main() {
 					commands.IgnoreFiles(cCtx)
 					return nil
 				},
+				Flags: globalFlags,
 			},
 			{
 				Name:  "unignore",
@@ -58,6 +63,7 @@ func main() {
 					commands.UnIgnoreFiles(cCtx)
 					return nil
 				},
+				Flags: globalFlags,
 			},
 		},
 	}
