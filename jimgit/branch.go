@@ -17,7 +17,7 @@ func SyncCurrentBranch() {
 	defer PopStashByName(stashName)
 
 	// fetch all branches
-	fetchCommand := "fetch --all"
+	fetchCommand := "fetch"
 	execute.RunGitCommand(fetchCommand, false)
 
 	// sync --ff-only
