@@ -2,6 +2,8 @@
 
 jim is a tool for help you with git.
 
+jim is not a git replacement, it just automates some git workflows that I use frequently.
+
 ## Commands
 
 - `jim sw [<branch>]` - Checkout a branch. First, it stashes current branch changes. Then, it checks out the specified branch. Finally, it pops the stash on the target branch (if jim created it before).
