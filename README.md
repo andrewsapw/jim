@@ -11,6 +11,7 @@ jim is not a git replacement, it just automates some git workflows that I use fr
 - `jim ignore [<file>]` - Do not track a file. Under the hood, it runs `git update-index --assume-unchanged [<file>]`
 - `jim unignore [<file>]` - Track a file. Under the hood, it runs `git update-index --no-assume-unchanged [<file>]`
 
+If jim is not able to run a command, it will run the "raw" git command instead. For example, `jim status` will just run `git status`.
 
 ## Installation
 
